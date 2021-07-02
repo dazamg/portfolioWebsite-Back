@@ -21,6 +21,7 @@ router.get('/me', checkJwt, checkRole('admin'), getBlogsByUser)
 
 //Get all the blog by id route
 router.get('/:id',  getBlogById)
+//Get all the blog by id slug
 router.get('/s/:slug', getBlogBySlug)
 
 router.post('', checkJwt, checkRole('admin'), createBlog)

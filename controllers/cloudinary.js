@@ -6,7 +6,6 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET,
   });
 
-// req.files.file.path
 exports.upload = async (req, res) => {
   let result = await cloudinary.uploader.upload(req.body.image, {
     public_id: `${Date.now()}`,
