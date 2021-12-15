@@ -18,9 +18,14 @@ const startServer = async () => {
         res.json({message: 'Hello World'})
     })
 
+    // server.get('*', (req, res) => {
+    //     res.json({message: 'Welcome to my Portfolio Application'})
+    // })
+
     server.get('', (req, res) => {
         res.sendFile('index.html', {root: __dirname})
     })
+
 
     const PORT = parseInt(process.env.PORT, 10) || 3001;
     server.listen(PORT, (err) => {
