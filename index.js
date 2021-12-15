@@ -8,13 +8,16 @@ require('dotenv').config()
 const startServer = async () => {
     await require('./db').connect();  
 
+    //portfolios and blogs routes
     server.use(bodyParser.json())
     server.use('/api/v1/portfolios', require('./routes/portfolios'))
     server.use('/api/v1/blogs', require('./routes/blogs'))
 
+    //Testing for endpoint
     server.get('/test', (req, res) => {
         res.json({message: 'Hello World'})
     })
+
     const PORT = parseInt(process.env.PORT, 10) || 3001;
     server.listen(PORT, (err) => {
         if(err) console.error(err);
