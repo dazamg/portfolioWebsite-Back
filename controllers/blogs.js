@@ -7,15 +7,16 @@ const { getAccessToken, getAuth0User } = require('./auth');
 exports.getBlogs = async (req, res) => {
   const blogs = await Blog.find({status: 'published'}).sort({createdAt: -1});
   const { access_token } = await getAccessToken();
-  let blogWithUsers = [];
+  const blogsWithUsers = [];
   const authors = {};
 
-  for(let blog of blogs) {
+  for (let blog of blogs) {
     const author = authors[blog.userId] || await getAuth0User(access_token)(blog.userId);
     authors[author.user_id] = author;
-    blogWithUsers.push({blog, author})
+    blogsWithUsers.push({blog, author});
   }
-  return res.json(blogWithUsers);
+
+  return res.json(blogsWithUsers);
 }
 
 exports.getBlogsByUser = async (req, res) => {

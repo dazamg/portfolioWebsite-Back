@@ -29,19 +29,18 @@ exports.createPortfolio = async (req, res) => {
   }
 }
 
-
-
 exports.updatePortfolio = async (req, res) => {
-  const { body, params: {id}} = req; 
+  const { body, params: {id}} = req;
+
   try {
-    const updatedPortfolio = await Portfolio.findOneAndUpdate({_id: id}, body, {new: true, runValidators: true});
+    const updatedPortfolio = await Portfolio.findOneAndUpdate({_id: id}, body, {new: true, runValidators: true})
     return res.json(updatedPortfolio);
   } catch(error) {
     return res.status(422).send(error.message);
   }
-};
+}
 
 exports.deletePortfolio = async (req, res) => {
-  const portfolio = await Portfolio.findByIdAndRemove({_id: req.params.id});
+  const portfolio = await Portfolio.findOneAndRemove({_id: req.params.id});
   return res.json({_id: portfolio.id})
 }
